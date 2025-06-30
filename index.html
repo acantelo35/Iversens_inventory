@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bakery Inventory</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='bakery-style.css') }}" />
+</head>
+<body>
+  <header>🧁 Bakery Inventory Tracker</header>
+
+  <section>
+    <form action="/add" method="post">
+      <h2>Add New Item</h2>
+      <input type="text" name="item" placeholder="Item name" required />
+      <input type="number" name="quantity" placeholder="Quantity" required />
+      <button type="submit">Add Item</button>
+    </form>
+
+    <form action="/update" method="post">
+      <h2>Update Existing Item</h2>
+      <input type="text" name="item" placeholder="Item name" required />
+      <input type="number" name="quantity" placeholder="New quantity" required />
+      <button type="submit">Update</button>
+    </form>
+
+    <h3>📋 Current Inventory</h3>
+    <table>
+      <tr><th>Item</th><th>Quantity</th></tr>
+      {% for item, qty in inventory.items() %}
+      <tr><td>{{ item }}</td><td>{{ qty }}</td></tr>
+      {% endfor %}
+    </table>
+
+    <p>🕒 Last Updated: {{ last_updated or "Never" }}</p>
+  </section>
+
+  <footer>Powered by sugar and Python 🍞</footer>
+</body>
+</html>
