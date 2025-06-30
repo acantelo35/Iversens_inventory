@@ -1,0 +1,34 @@
+body {
+  font-family: sans-serif;
+  max-width: 800px;
+  margin: auto;
+  background: #fff8f0;
+  color: #333;
+}
+header, footer {
+  text-align: center;
+  font-size: 1.5em;
+  padding: 1em;
+  background: #ffe3e3;
+}
+section {
+  padding: 1em;
+}
+form {
+  margin-bottom: 1em;
+  background: #fcefe3;
+  padding: 1em;
+  border-radius: 5px;
+}
+input, button {
+  padding: 0.5em;
+  margin: 0.25em;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 0.5em;
+  border-bottom: 1px solid #ccc;
+}
