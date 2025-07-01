@@ -1,0 +1,9 @@
+bakery-inventory/
+├── app.py
+├── inventory.json
+├── requirements.txt
+├── Procfile
+├── static/
+│   └── style.css
+└── templates/
+    └── index.html
