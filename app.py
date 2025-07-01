@@ -6,14 +6,12 @@ import os
 app = Flask(__name__)
 DATA_FILE = "inventory.json"
 
-# Load inventory from file
 def load_inventory():
     if os.path.exists(DATA_FILE):
         with open(DATA_FILE, "r") as f:
             return json.load(f)
     return {}
 
-# Save inventory to file
 def save_inventory():
     with open(DATA_FILE, "w") as f:
         json.dump(inventory, f)
@@ -24,7 +22,7 @@ inventory = load_inventory()
 def home():
     return render_template("index.html", inventory=inventory)
 
-@app.route("/add", methods=["POST"])
+@app.route("/add", methods=["POST"])  # <-- Make sure methods=["POST"] is here
 def add_item():
     item = request.form.get("item").strip().lower()
     quantity = request.form.get("quantity")
@@ -39,7 +37,7 @@ def add_item():
         save_inventory()
     return redirect(url_for("home"))
 
-@app.route("/update", methods=["POST"])
+@app.route("/update", methods=["POST"])  # <-- Make sure methods=["POST"] is here
 def update_item():
     item = request.form.get("item").strip().lower()
     quantity = request.form.get("quantity")
