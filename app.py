@@ -1,35 +1,53 @@
-from flask import Flask, request, render_template, redirect
+from flask import Flask, request, render_template, redirect, url_for
 from datetime import datetime
+import json
+import os
 
 app = Flask(__name__)
-inventory = {}
-last_updated = None
+DATA_FILE = "inventory.json"
+
+# Load inventory from file
+def load_inventory():
+    if os.path.exists(DATA_FILE):
+        with open(DATA_FILE, "r") as f:
+            return json.load(f)
+    return {}
+
+# Save inventory to file
+def save_inventory():
+    with open(DATA_FILE, "w") as f:
+        json.dump(inventory, f)
+
+inventory = load_inventory()
 
 @app.route("/", methods=["GET"])
 def home():
-    return render_template("index.html", inventory=inventory, last_updated=last_updated)
+    return render_template("index.html", inventory=inventory)
 
 @app.route("/add", methods=["POST"])
 def add_item():
-    item = request.form.get("item")
+    item = request.form.get("item").strip().lower()
     quantity = request.form.get("quantity")
     if item and quantity:
-        inventory[item] = inventory.get(item, 0) + int(quantity)
-        update_timestamp()
-    return redirect("/")
+        quantity = int(quantity)
+        today = datetime.now().strftime("%Y-%m-%d")
+        if item in inventory:
+            inventory[item]["quantity"] += quantity
+            inventory[item]["date"] = today
+        else:
+            inventory[item] = {"quantity": quantity, "date": today}
+        save_inventory()
+    return redirect(url_for("home"))
 
 @app.route("/update", methods=["POST"])
 def update_item():
-    item = request.form.get("item")
+    item = request.form.get("item").strip().lower()
     quantity = request.form.get("quantity")
-    if item and quantity:
-        inventory[item] = int(quantity)
-        update_timestamp()
-    return redirect("/")
-
-def update_timestamp():
-    global last_updated
-    last_updated = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    if item and quantity and item in inventory:
+        inventory[item]["quantity"] = int(quantity)
+        inventory[item]["date"] = datetime.now().strftime("%Y-%m-%d")
+        save_inventory()
+    return redirect(url_for("home"))
 
 if __name__ == "__main__":
     app.run(debug=True)
