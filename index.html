@@ -1,59 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Iversen’s Bakery Freezer Inventory</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
-</head>
-<body>
-  <header>
-    <h1 class="fancy-title">🧁 Iversen’s Bakery Freezer Inventory</h1>
-  </header>
+<form action="/add" method="POST">
+  <!-- input fields -->
+</form>
 
-  <section>
-    <form action="/add" method="POST">
-      <h3>Add Item</h3>
-      <input type="text" name="item" placeholder="e.g. vanilla donuts" required />
-      <input type="number" name="quantity" placeholder="Quantity" required />
-      <button type="submit">Add</button>
-    </form>
-
-    <form action="/update" method="POST">
-      <h3>Update Item Quantity</h3>
-      <input type="text" name="item" placeholder="e.g. vanilla donuts" required />
-      <input type="number" name="quantity" placeholder="New quantity" required />
-      <button type="submit">Update</button>
-    </form>
-
-    <h2>📋 Inventory</h2>
-    {% if inventory %}
-    <table>
-      <thead>
-        <tr>
-          <th>Item</th>
-          <th>Quantity</th>
-          <th>Last Updated</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for item, data in inventory.items() %}
-        <tr>
-          <td>{{ item.title() }}</td>
-          <td>{{ data.quantity }}</td>
-          <td>{{ data.date }}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-    {% else %}
-    <p>No items yet — add some frozen goodies!</p>
-    {% endif %}
-  </section>
-
-  <footer>
-    <p>&copy; 2025 Iversen’s Bakery</p>
-  </footer>
-</body>
-</html>
+<form action="/update" method="POST">
+  <!-- input fields -->
+</form>
