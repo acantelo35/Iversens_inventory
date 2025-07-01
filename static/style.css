@@ -1,7 +1,7 @@
 body {
   background: #005f73; /* Blue background */
   color: #c0c0c0; /* Silver text */
-  font-family: sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   max-width: 900px;
   margin: auto;
   padding: 2em;
@@ -12,7 +12,7 @@ header, footer {
   text-align: center;
   font-size: 1.5em;
   padding: 1em;
-  background: #0a9396;
+  background: #0a9396; /* darker teal */
   color: #f0f0f0;
 }
 
@@ -31,10 +31,10 @@ section {
 
 form {
   margin-bottom: 2em;
-  background: #94d2bd;
+  background: #94d2bd; /* light teal */
   padding: 1em;
   border-radius: 5px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
 input, button {
